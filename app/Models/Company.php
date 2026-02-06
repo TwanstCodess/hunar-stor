@@ -59,6 +59,6 @@ class Company extends Model
      */
     public static function getSettings()
     {
-        return self::first() ?? new self(['name' => 'بەگلاس']);
+        return self::first() ?? new self(['name' => 'شوێنی هونەر']);
     }
 }
