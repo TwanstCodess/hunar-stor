@@ -1,0 +1,347 @@
+// resources/js/Pages/Sales/Print.jsx
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Link } from '@inertiajs/react';
+import { Printer, ArrowLeft } from 'lucide-react';
+
+export default function Print({ sale, company }) {
+    const formatCurrency = (amount, currency) => {
+        return new Intl.NumberFormat('ar-IQ').format(amount) + ' ' + currency;
+    };
+
+    const formatDate = (date) => {
+        return new Date(date).toLocaleDateString('ar-IQ', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+    };
+
+    const calculateSubtotal = () => {
+        return sale.items?.reduce((sum, item) => sum + item.total_price, 0) || 0;
+    };
+
+    return (
+        <AuthenticatedLayout>
+            <div className="max-w-4xl mx-auto">
+                {/* Control Buttons */}
+                <div className="flex items-center justify-between p-4 mb-6 bg-white rounded-lg shadow-sm print:hidden">
+                    <div className="flex items-center gap-3">
+                        <Link
+                            href={`/sales/${sale.id}`}
+                            className="flex items-center gap-2 px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
+                        >
+                            <ArrowLeft className="w-4 h-4" />
+                            گەڕانەوە
+                        </Link>
+                        <button
+                            onClick={() => window.print()}
+                            className="flex items-center gap-2 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                        >
+                            <Printer className="w-4 h-4" />
+                            چاپکردن
+                        </button>
+                    </div>
+                    <div className="text-sm text-gray-500">
+                        <span className="font-semibold">وەسڵ:</span> {sale.invoice_number}
+                    </div>
+                </div>
+
+                {/* Invoice Container */}
+                <div className="p-8 overflow-hidden bg-white border rounded-lg shadow-lg">
+                    {/* Header */}
+
+
+              {/* Header */}
+                    <div className="flex items-center justify-center p-4 mb-1 border-b-2 print:border-b print:border-black">
+    <div className="text-center"> {/* زیادکردنی text-center */}
+        <div className="flex items-center justify-center gap-2 mb-1"> {/* زیادکردنی justify-center */}
+            <h2 className="text-2xl font-bold text-black-700 print:text-black">کارگەی بلۆکی بێگەڵاس</h2>
+        </div>
+        <div className="text-xs text-center text-red-700 print:text-red-800"> {/* زیادکردنی text-center */}
+            <b><p>بۆ فرۆشتنی کەرەستەی بیناسازی کەرپووچ - ئینگڵاینی سەردەگا و پەنچەرە</p></b>
+          <b>  <p>بە هەموو قیاساتەکانی وە بلۆکی سوور بە هەموو قیاساتەکانی شیش + چەمەنتۆ + لم + چەو + B.R.C</p></b>
+        </div>
+        <div className="text-xs text-center text-black-700 print:text-black-800">
+           <br />
+            <b><p>0770 157 8023 - 0750 112 7325 - 0750 116 5959 - 0750 114 0551</p></b>
+        </div>
+
+    </div>
+
+</div>
+
+{/* Customer Info */}
+<div className="p-3 mb-6 border border-gray-200 rounded-lg bg-gray-50 print:border-black print:bg-gray-100">
+    <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-xs text-gray-600 print:text-gray-800">
+            ژمارەی قەرز: <span className="font-bold">DEBT-{customer.id}-{Date.now().toString().slice(-6)}</span>
+        </p>
+
+        <div className="flex items-center gap-4">
+            <p className="text-xs text-gray-600 print:text-gray-800">
+                ناو: <span className="mr-2 font-bold">{customer.name}</span>
+            </p>
+
+            {customer.phone && (
+                <p className="text-xs text-gray-600 print:text-gray-800">
+                    مۆبایل: <span className="mr-2 font-bold">{customer.phone}</span>
+                </p>
+            )}
+
+            <p className="text-xs text-gray-600 print:text-gray-800">
+                بەروار: {formatDate(new Date())} | کات: {getTimeWithPeriod(new Date())}
+            </p>
+        </div>
+    </div>
+</div>
+
+                    {/* Items Table */}
+                    <div className="mb-8">
+                        <h3 className="pb-2 mb-4 text-lg font-semibold text-gray-800 border-b">بەرهەمەکان</h3>
+                        <div className="overflow-x-auto">
+                            <table className="w-full border-collapse">
+                                <thead>
+                                    <tr className="bg-gray-50">
+                                        <th className="px-4 py-3 font-semibold text-right text-gray-700 border border-gray-300">#</th>
+                                        <th className="px-4 py-3 font-semibold text-right text-gray-700 border border-gray-300">بەرهەم</th>
+                                        <th className="px-4 py-3 font-semibold text-right text-gray-700 border border-gray-300">بڕ</th>
+                                        <th className="px-4 py-3 font-semibold text-right text-gray-700 border border-gray-300">یەکە</th>
+                                        <th className="px-4 py-3 font-semibold text-right text-gray-700 border border-gray-300">نرخی یەکە</th>
+                                        <th className="px-4 py-3 font-semibold text-right text-gray-700 border border-gray-300">کۆی گشتی</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {sale.items?.map((item, index) => (
+                                        <tr key={item.id} className="hover:bg-gray-50">
+                                            <td className="px-4 py-3 text-center border border-gray-300">{index + 1}</td>
+                                            <td className="px-4 py-3 border border-gray-300">
+                                                <div className="font-medium">{item.product?.name}</div>
+
+                                            </td>
+                                            <td className="px-4 py-3 text-center border border-gray-300">{item.quantity}</td>
+                                            <td className="px-4 py-3 text-center border border-gray-300">
+                                                {item.product?.base_unit?.name || 'دانە'}
+                                            </td>
+                                            <td className="px-4 py-3 text-center border border-gray-300">
+                                                {formatCurrency(item.unit_price, sale.currency)}
+                                            </td>
+                                            <td className="px-4 py-3 font-medium text-center border border-gray-300">
+                                                {formatCurrency(item.total_price, sale.currency)}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    {/* New Summary Table */}
+                    <div className="mb-8">
+                        <h3 className="pb-2 mb-4 text-lg font-semibold text-gray-800 border-b">کۆی گشتی</h3>
+                        <div className="overflow-x-auto">
+                            <table className="w-full border-collapse">
+                                <thead>
+                                    <tr className="bg-gray-50">
+                                        <th className="px-4 py-3 font-semibold text-center text-gray-700 border border-gray-300">کۆی گشتی</th>
+                                        <th className="px-4 py-3 font-semibold text-center text-gray-700 border border-gray-300">پارەی دراو</th>
+                                        <th className="px-4 py-3 font-semibold text-center text-gray-700 border border-gray-300">ماوە</th>
+                                        <th className="px-4 py-3 font-semibold text-center text-gray-700 border border-gray-300">جۆری فرۆشتن</th>
+                                        <th className="px-4 py-3 font-semibold text-center text-gray-700 border border-gray-300">شێوازی پارەدان</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="px-4 py-3 text-xl font-bold text-center text-blue-600 border border-gray-300">
+                                            {formatCurrency(sale.total_amount, sale.currency)}
+                                        </td>
+                                        <td className="px-4 py-3 text-lg font-semibold text-center text-green-600 border border-gray-300">
+                                            {formatCurrency(sale.paid_amount, sale.currency)}
+                                        </td>
+                                        <td className={`px-4 py-3 text-lg font-semibold text-center border border-gray-300 ${
+                                            sale.remaining_amount > 0 ? 'text-red-600' : 'text-gray-600'
+                                        }`}>
+                                            {formatCurrency(sale.remaining_amount, sale.currency)}
+                                        </td>
+                                        <td className="px-4 py-3 text-center border border-gray-300">
+                                            <span className={`px-3 py-1 text-sm font-medium rounded ${
+                                                sale.sale_type === 'cash'
+                                                    ? 'bg-green-100 text-green-800'
+                                                    : 'bg-blue-100 text-blue-800'
+                                            }`}>
+                                                {sale.sale_type === 'cash' ? 'کاش' : 'قەرز'}
+                                            </span>
+                                        </td>
+                                        <td className="px-4 py-3 text-center border border-gray-300">
+                                            {sale.payment_method ? (
+                                                <span className="px-3 py-1 text-sm font-medium text-gray-800 bg-gray-100 rounded">
+                                                    {sale.payment_method === 'cash' ? 'کاش' :
+                                                     sale.payment_method === 'pos' ? 'پۆس' : 'گواستنەوە'}
+                                                </span>
+                                            ) : (
+                                                <span className="text-gray-400">-</span>
+                                            )}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {sale.remaining_amount > 0 && (
+                            <div className="p-4 mt-4 border border-yellow-200 rounded-lg bg-yellow-50">
+                                <p className="text-center text-yellow-700">
+                                    {sale.sale_type === 'credit'
+                                        ? 'ئەم فرۆشتنە قەرزە، تکایە پارەی ماوە لە کاتی دیاریکراودا بدرێت'
+                                        : 'تکایە پارەی ماوە لە دوای کات لێ نەمێنێت'
+                                    }
+                                </p>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Notes Section */}
+                    {sale.notes && (
+                        <div className="mb-8">
+                            <h3 className="pb-2 mb-4 text-lg font-semibold text-gray-800 border-b">تێبینی</h3>
+                            <p className="p-4 text-gray-700 border rounded bg-gray-50">{sale.notes}</p>
+                        </div>
+                    )}
+
+                    {/* Footer */}
+                    <div className="pt-8 mt-12 border-t">
+                        <div className="grid grid-cols-3 gap-8 text-center">
+                            <div>
+                                <p className="mb-2 font-medium text-gray-700">کڕیار</p>
+                                <div className="h-16 pt-2 border-t border-gray-300">
+                                    <p className="text-sm text-gray-600">واژۆ</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p className="mb-2 font-medium text-gray-700">بەڕێوەبەر</p>
+                                <div className="h-16 pt-2 border-t border-gray-300">
+                                    <p className="text-sm text-gray-600">واژۆ</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p className="mb-2 font-medium text-gray-700">مۆر</p>
+                                <div className="h-16 pt-2 border-t border-gray-300">
+                                    <p className="text-sm text-gray-600">مۆر و مەتری</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Print Instructions */}
+                <div className="p-4 mt-8 text-sm text-blue-700 border border-blue-200 rounded-lg bg-blue-50 print:hidden">
+                    <p className="mb-2 font-medium">ڕێنمایی چاپکردن:</p>
+                    <ul className="space-y-1 list-disc list-inside">
+                        <li>دوگمەی "چاپکردن" کلیک بکە یان کلتوری Ctrl+P بکەرەوە</li>
+                        <li>لە دیالۆگی چاپکردندا، "زیاترەکان" هەڵبژێرە</li>
+                        <li>ڕووکار: پۆرترێیت | قەبارە: A4 | مەودا: هەموو پەڕەکان</li>
+                        <li>هێڵە ناسێنراوەکان و پێناسەکان چاپ مەکە</li>
+                        <li>پێشبینینی پەڕەکە ببینە پێش چاپکردن</li>
+                    </ul>
+                </div>
+            </div>
+
+            {/* Print Styles */}
+            <style jsx>{`
+                @media print {
+                    nav, header, button, .print\\:hidden {
+                        display: none !important;
+                    }
+
+                    body {
+                        font-size: 12pt;
+                        color: #000;
+                        background: #fff;
+                    }
+
+                    .max-w-4xl {
+                        max-width: 100% !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    }
+
+                    .bg-white {
+                        background: white !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                    }
+
+                    .border, .border-t, .border-b, .border-r, .border-l {
+                        border-color: #000 !important;
+                    }
+
+                    .rounded-lg, .rounded {
+                        border-radius: 0 !important;
+                    }
+
+                    .shadow-lg {
+                        box-shadow: none !important;
+                    }
+
+                    .p-8 {
+                        padding: 20px !important;
+                    }
+
+                    .mt-12 {
+                        margin-top: 30px !important;
+                    }
+
+                    .text-blue-600, .text-green-600, .text-red-600 {
+                        color: #000 !important;
+                    }
+
+                    table {
+                        page-break-inside: avoid;
+                    }
+
+                    tr {
+                        page-break-inside: avoid;
+                        page-break-after: auto;
+                    }
+
+                    thead {
+                        display: table-header-group;
+                    }
+
+                    tfoot {
+                        display: table-footer-group;
+                    }
+
+                    .break-before {
+                        page-break-before: always;
+                    }
+
+                    .break-after {
+                        page-break-after: always;
+                    }
+
+                    .avoid-break {
+                        page-break-inside: avoid;
+                    }
+                }
+
+                @page {
+                    size: A4 portrait;
+                    margin: 20mm;
+
+                    @top-center {
+                        content: "وەسڵی فرۆشتن";
+                        font-size: 14pt;
+                        font-weight: bold;
+                    }
+
+                    @bottom-center {
+                        content: "پەڕەی " counter(page) " لە " counter(pages);
+                        font-size: 10pt;
+                        color: #666;
+                    }
+                }
+            `}</style>
+        </AuthenticatedLayout>
+    );
+}

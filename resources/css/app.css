@@ -1,0 +1,61 @@
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  body {
+    @apply text-gray-900 bg-gray-50;
+    font-family: 'IBM Plex Sans Arabic';
+  }
+
+  [dir="rtl"] {
+    direction: rtl;
+  }
+}
+*{
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+@layer components {
+  .btn {
+    @apply px-4 py-2 font-medium transition-colors duration-200 rounded-lg;
+  }
+
+  .btn-primary {
+    @apply text-white bg-primary-600 hover:bg-primary-700;
+  }
+
+  .btn-secondary {
+    @apply text-white bg-gray-600 hover:bg-gray-700;
+  }
+
+  .btn-danger {
+    @apply text-white bg-red-600 hover:bg-red-700;
+  }
+
+  .input {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+  }
+
+  .card {
+    @apply bg-white border border-gray-200 shadow-sm rounded-xl;
+  }
+
+  .table {
+    @apply w-full text-sm text-right;
+  }
+
+  .table thead {
+    @apply border-b border-gray-200 bg-gray-50;
+  }
+
+  .table th {
+    @apply px-6 py-3 font-semibold text-gray-700;
+  }
+
+  .table td {
+    @apply px-6 py-4 border-b border-gray-100;
+  }
+
+  .table tbody tr:hover {
+    @apply bg-gray-50;
+  }
+}
