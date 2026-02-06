@@ -21,7 +21,7 @@ export default function Login() {
             <div className="w-full max-w-md overflow-hidden bg-white shadow-2xl rounded-2xl">
                 {/* Header */}
                 <div className="p-8 text-center bg-gradient-to-r from-blue-600 to-indigo-700">
-                    <h1 className="text-3xl font-bold text-white">نوسینگەی ئاریان</h1>
+                    <h1 className="text-3xl font-bold text-white">شوێنی هونەر</h1>
                     <p className="mt-2 text-blue-100">سیستەمی بەڕێوەبردنی کڕین و فرۆشتن</p>
                 </div>
 

@@ -106,7 +106,7 @@ const formatKurdishDate = (date) => {
                 />
                 <div className="fixed inset-y-0 right-0 w-64 bg-white shadow-xl">
                     <div className="flex items-center justify-between h-16 px-4 border-b">
-                        <span className="text-xl font-bold text-gray-800">نوسینگەی ئاریان</span>
+                        <span className="text-xl font-bold text-gray-800">شوێنی هونەر</span>
                         <button
                             onClick={() => setSidebarOpen(false)}
                             className="p-2 rounded-lg hover:bg-gray-100"
@@ -172,7 +172,7 @@ const formatKurdishDate = (date) => {
                             <Building className="w-6 h-6 text-white" />
                         </div>
                         {!sidebarCollapsed && (
-                            <span className="mr-3 text-xl font-bold text-gray-800">نوسینگەی ئاریان</span>
+                            <span className="mr-3 text-xl font-bold text-gray-800">شوێنی هونەر</span>
                         )}
                     </div>
 

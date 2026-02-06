@@ -191,7 +191,7 @@ const formatDate = (date) => {
             <div className="flex items-center justify-center p-3 mb-2 border-b-2 print:border-b print:border-black">
                 <div className="text-center">
                     <div className="flex items-center justify-center gap-2 mb-1">
-                        <h2 className="text-2xl font-bold text-black-700 print:text-black">{company?.name || 'نوسینگەی ئاریان'}</h2>
+                        <h2 className="text-2xl font-bold text-black-700 print:text-black">{company?.name || 'شوێنی هونەر'}</h2>
                     </div>
                     <div className="text-xl text-center text-red-700 print:text-red-800">
                         <b><p>بەڵگەنامەی قەرز</p></b>

@@ -312,7 +312,7 @@ const formatDateTime = (date) => {
               {/* Center */}
               <div className="flex-1 leading-relaxed text-center">
                 <h2 className="text-2xl font-extrabold tracking-tight text-black sm:text-3xl">
-                  نوسینگەی ئاریان
+                  شوێنی هونەر
                 </h2>
 
                 <div className="mb-1 text-[15px] font-bold text-red-700 print:text-red-800">

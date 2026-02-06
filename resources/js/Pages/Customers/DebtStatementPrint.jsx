@@ -312,7 +312,7 @@ export default function DebtStatementPrint({ customer, sales, totalDebt, company
               {/* Center - LARGER FONT IN PRINT */}
               <div className="flex-1 leading-relaxed text-center">
                 <h2 className="text-2xl font-extrabold tracking-tight text-black sm:text-3xl print:text-2xl print:font-black print:text-black">
-                  نوسینگەی ئاریان
+                  شوێنی هونەر
                 </h2>
 
                 <div className="mb-1 text-[15px] font-bold text-red-700 print:text-[15px] print:font-bold print:text-red-700">

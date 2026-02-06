@@ -99,7 +99,7 @@ export default function Print({ sale, company }) {
                         <div className="flex-shrink-0 w-28 h-28 print:w-24 print:h-24">
                             <img
                                 src="/logo/logo.png"
-                                alt="لۆگۆی نوسینگەی ئاریان"
+                                alt="لۆگۆی شوێنی هونەر"
                                 className="object-contain w-full h-full print:max-h-24"
                             />
                         </div>
@@ -107,7 +107,7 @@ export default function Print({ sale, company }) {
                         {/* ناوەڕۆکی ناوەڕاست - LARGER TEXT */}
                         <div className="flex-1 px-6 leading-relaxed text-center print:px-4">
                             <h2 className="mb-2 text-3xl font-extrabold text-black print:text-2xl print:font-black print:text-black">
-                                نوسینگەی ئاریان
+                                شوێنی هونەر
                             </h2>
 
                             <div className="mb-2 text-[16px] font-bold text-red-700 print:text-[15px] print:font-bold print:text-red-700">
@@ -133,7 +133,7 @@ export default function Print({ sale, company }) {
                         <div className="flex-shrink-0 w-28 h-28 print:w-24 print:h-24">
                             <img
                                 src="/logo/logo2.png"
-                                alt="لۆگۆی نوسینگەی ئاریان"
+                                alt="لۆگۆی شوێنی هونەر"
                                 className="object-contain w-full h-full print:max-h-24"
                             />
                         </div>

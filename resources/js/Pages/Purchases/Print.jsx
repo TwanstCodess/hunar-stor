@@ -304,7 +304,7 @@ const formatDate = (date) => {
       <div class="invoice-container" id="print-content">
         <!-- سەرۆک -->
         <div class="invoice-header">
-          <div class="company-name">نوسینگەی ئاریان</div>
+          <div class="company-name">شوێنی هونەر</div>
 
           <div class="company-details">مۆبایل: ${company?.phone || '---'} | ${company?.address || 'ناونیشان'}</div>
         </div>
