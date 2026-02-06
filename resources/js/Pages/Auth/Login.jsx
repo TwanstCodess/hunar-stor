@@ -110,7 +110,7 @@ export default function Login() {
                             </div>
                             <div className="relative flex justify-center text-sm">
                                 <span className="px-2 text-gray-500 bg-white">
-                                    سیستەمی بەڕێوەبردن بۆ کۆمپانیای بیناسازی
+                                    سیستەمی بەڕێوەبردن بۆ  کۆگا و دووکانی هونەر
                                 </span>
                             </div>
                         </div>
